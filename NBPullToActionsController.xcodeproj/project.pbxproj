@@ -7,18 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB98FBB4EE4C4600B100E75C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF86F6E494B5475FAFEAADE0 /* libPods.a */; };
 		E9254C09187A49DB0049B7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9254C08187A49DB0049B7C8 /* Foundation.framework */; };
 		E9254C0B187A49DB0049B7C8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9254C0A187A49DB0049B7C8 /* CoreGraphics.framework */; };
 		E9254C0D187A49DB0049B7C8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9254C0C187A49DB0049B7C8 /* UIKit.framework */; };
 		E9254C13187A49DB0049B7C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9254C11187A49DB0049B7C8 /* InfoPlist.strings */; };
 		E9254C15187A49DB0049B7C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E9254C14187A49DB0049B7C8 /* main.m */; };
 		E9254C19187A49DB0049B7C8 /* NBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9254C18187A49DB0049B7C8 /* NBAppDelegate.m */; };
-		E9254C1B187A49DB0049B7C8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9254C1A187A49DB0049B7C8 /* Images.xcassets */; };
 		E9254C22187A49DB0049B7C8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9254C21187A49DB0049B7C8 /* XCTest.framework */; };
 		E9254C23187A49DB0049B7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9254C08187A49DB0049B7C8 /* Foundation.framework */; };
 		E9254C24187A49DB0049B7C8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9254C0C187A49DB0049B7C8 /* UIKit.framework */; };
 		E9254C2C187A49DB0049B7C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9254C2A187A49DB0049B7C8 /* InfoPlist.strings */; };
 		E9254C2E187A49DB0049B7C8 /* NBPullToActionsControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E9254C2D187A49DB0049B7C8 /* NBPullToActionsControllerTests.m */; };
+		E9254C39187A4F220049B7C8 /* NBTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9254C38187A4F220049B7C8 /* NBTableViewController.m */; };
+		E9254C40187A52850049B7C8 /* NSArray+Shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = E9254C3F187A52850049B7C8 /* NSArray+Shuffle.m */; };
+		E9254C48187A52EB0049B7C8 /* NBPullToActionControl.m in Sources */ = {isa = PBXBuildFile; fileRef = E9254C43187A52EB0049B7C8 /* NBPullToActionControl.m */; };
+		E9254C4A187A52EB0049B7C8 /* NBPullToActionsControl.m in Sources */ = {isa = PBXBuildFile; fileRef = E9254C47187A52EB0049B7C8 /* NBPullToActionsControl.m */; };
+		E94CD81F187FE6710034409B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E94CD81E187FE6710034409B /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37F43492A2A148349F379D01 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		E9254C05187A49DB0049B7C8 /* NBPullToActionsController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NBPullToActionsController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9254C08187A49DB0049B7C8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E9254C0A187A49DB0049B7C8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -42,12 +48,21 @@
 		E9254C16187A49DB0049B7C8 /* NBPullToActionsController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NBPullToActionsController-Prefix.pch"; sourceTree = "<group>"; };
 		E9254C17187A49DB0049B7C8 /* NBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NBAppDelegate.h; sourceTree = "<group>"; };
 		E9254C18187A49DB0049B7C8 /* NBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBAppDelegate.m; sourceTree = "<group>"; };
-		E9254C1A187A49DB0049B7C8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E9254C20187A49DB0049B7C8 /* NBPullToActionsControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NBPullToActionsControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9254C21187A49DB0049B7C8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E9254C29187A49DB0049B7C8 /* NBPullToActionsControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NBPullToActionsControllerTests-Info.plist"; sourceTree = "<group>"; };
 		E9254C2B187A49DB0049B7C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E9254C2D187A49DB0049B7C8 /* NBPullToActionsControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NBPullToActionsControllerTests.m; sourceTree = "<group>"; };
+		E9254C37187A4F220049B7C8 /* NBTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBTableViewController.h; sourceTree = "<group>"; };
+		E9254C38187A4F220049B7C8 /* NBTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBTableViewController.m; sourceTree = "<group>"; };
+		E9254C3E187A52850049B7C8 /* NSArray+Shuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Shuffle.h"; sourceTree = "<group>"; };
+		E9254C3F187A52850049B7C8 /* NSArray+Shuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Shuffle.m"; sourceTree = "<group>"; };
+		E9254C42187A52EB0049B7C8 /* NBPullToActionControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBPullToActionControl.h; sourceTree = "<group>"; };
+		E9254C43187A52EB0049B7C8 /* NBPullToActionControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBPullToActionControl.m; sourceTree = "<group>"; };
+		E9254C46187A52EB0049B7C8 /* NBPullToActionsControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBPullToActionsControl.h; sourceTree = "<group>"; };
+		E9254C47187A52EB0049B7C8 /* NBPullToActionsControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBPullToActionsControl.m; sourceTree = "<group>"; };
+		E94CD81E187FE6710034409B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		EF86F6E494B5475FAFEAADE0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +73,7 @@
 				E9254C0B187A49DB0049B7C8 /* CoreGraphics.framework in Frameworks */,
 				E9254C0D187A49DB0049B7C8 /* UIKit.framework in Frameworks */,
 				E9254C09187A49DB0049B7C8 /* Foundation.framework in Frameworks */,
+				BB98FBB4EE4C4600B100E75C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +97,7 @@
 				E9254C27187A49DB0049B7C8 /* NBPullToActionsControllerTests */,
 				E9254C07187A49DB0049B7C8 /* Frameworks */,
 				E9254C06187A49DB0049B7C8 /* Products */,
+				37F43492A2A148349F379D01 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +117,7 @@
 				E9254C0A187A49DB0049B7C8 /* CoreGraphics.framework */,
 				E9254C0C187A49DB0049B7C8 /* UIKit.framework */,
 				E9254C21187A49DB0049B7C8 /* XCTest.framework */,
+				EF86F6E494B5475FAFEAADE0 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -107,9 +125,13 @@
 		E9254C0E187A49DB0049B7C8 /* NBPullToActionsController */ = {
 			isa = PBXGroup;
 			children = (
+				E9254C41187A52EB0049B7C8 /* NBPullToActionsControl */,
+				E9254C3E187A52850049B7C8 /* NSArray+Shuffle.h */,
+				E9254C3F187A52850049B7C8 /* NSArray+Shuffle.m */,
+				E9254C37187A4F220049B7C8 /* NBTableViewController.h */,
+				E9254C38187A4F220049B7C8 /* NBTableViewController.m */,
 				E9254C17187A49DB0049B7C8 /* NBAppDelegate.h */,
 				E9254C18187A49DB0049B7C8 /* NBAppDelegate.m */,
-				E9254C1A187A49DB0049B7C8 /* Images.xcassets */,
 				E9254C0F187A49DB0049B7C8 /* Supporting Files */,
 			);
 			path = NBPullToActionsController;
@@ -118,6 +140,7 @@
 		E9254C0F187A49DB0049B7C8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E94CD81E187FE6710034409B /* Images.xcassets */,
 				E9254C10187A49DB0049B7C8 /* NBPullToActionsController-Info.plist */,
 				E9254C11187A49DB0049B7C8 /* InfoPlist.strings */,
 				E9254C14187A49DB0049B7C8 /* main.m */,
@@ -144,6 +167,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E9254C41187A52EB0049B7C8 /* NBPullToActionsControl */ = {
+			isa = PBXGroup;
+			children = (
+				E9254C42187A52EB0049B7C8 /* NBPullToActionControl.h */,
+				E9254C43187A52EB0049B7C8 /* NBPullToActionControl.m */,
+				E9254C46187A52EB0049B7C8 /* NBPullToActionsControl.h */,
+				E9254C47187A52EB0049B7C8 /* NBPullToActionsControl.m */,
+			);
+			path = NBPullToActionsControl;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,9 +185,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E9254C31187A49DB0049B7C8 /* Build configuration list for PBXNativeTarget "NBPullToActionsController" */;
 			buildPhases = (
+				837C14B32B9A402A8A18A642 /* Check Pods Manifest.lock */,
 				E9254C01187A49DB0049B7C8 /* Sources */,
 				E9254C02187A49DB0049B7C8 /* Frameworks */,
 				E9254C03187A49DB0049B7C8 /* Resources */,
+				F45918C387B640AAB271AFD1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -221,7 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9254C13187A49DB0049B7C8 /* InfoPlist.strings in Resources */,
-				E9254C1B187A49DB0049B7C8 /* Images.xcassets in Resources */,
+				E94CD81F187FE6710034409B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,13 +271,50 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		837C14B32B9A402A8A18A642 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F45918C387B640AAB271AFD1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E9254C01187A49DB0049B7C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9254C40187A52850049B7C8 /* NSArray+Shuffle.m in Sources */,
+				E9254C4A187A52EB0049B7C8 /* NBPullToActionsControl.m in Sources */,
 				E9254C19187A49DB0049B7C8 /* NBAppDelegate.m in Sources */,
+				E9254C39187A4F220049B7C8 /* NBTableViewController.m in Sources */,
 				E9254C15187A49DB0049B7C8 /* main.m in Sources */,
+				E9254C48187A52EB0049B7C8 /* NBPullToActionControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +432,7 @@
 		};
 		E9254C32187A49DB0049B7C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37F43492A2A148349F379D01 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -372,6 +446,7 @@
 		};
 		E9254C33187A49DB0049B7C8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37F43492A2A148349F379D01 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -444,6 +519,7 @@
 				E9254C33187A49DB0049B7C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E9254C34187A49DB0049B7C8 /* Build configuration list for PBXNativeTarget "NBPullToActionsControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -452,6 +528,7 @@
 				E9254C36187A49DB0049B7C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
