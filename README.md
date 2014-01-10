@@ -1,4 +1,4 @@
-NBPullToActionsControl
+NBPullToActionsController
 =====
 
 This control provides an easy to use view to make "Pull to Refresh" and "Pull to Shuffle" possiable at the same time.
