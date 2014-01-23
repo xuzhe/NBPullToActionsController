@@ -3,7 +3,7 @@
 //  Rakunew
 //
 //  Created by Xu Zhe on 2013/09/04.
-//  Copyright (c) 2013年 RAKUNEW.com. All rights reserved.
+//  Copyright (c) 2014 xuzhe.com. All rights reserved.
 //
 
 #import <THObserversAndBinders/THObserversAndBinders.h>
@@ -95,12 +95,14 @@
 }
 
 - (void)panGestureRecognized:(UIPanGestureRecognizer *)gestureRecognizer {
-    if (_isRefreshing || ![gestureRecognizer isEqual:_panGestureRecognizer]) return;
+    if (!self.enabled || _isRefreshing || ![gestureRecognizer isEqual:_panGestureRecognizer]) return;
     
     if (gestureRecognizer.state == UIGestureRecognizerStatePossible || gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         _deltaOffset = 0.0f;
         _type = NBPullToActionTypeUnknown;
     } else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+        _lastSpeed = [gestureRecognizer velocityInView:self].y;
+        
         CGFloat txWithOutDelta = [gestureRecognizer translationInView:_midLineView].x * 2.0f;
         CGFloat tx = txWithOutDelta - _deltaOffset;
         
@@ -134,7 +136,7 @@
         [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
             _midLineView.transform = CGAffineTransformMakeTranslation(tx, 0.0f);
         }];
-    } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded && abs(_lastSpeed) <= self.maxActionFireSpeed) {
         if ((self.style == NBPullToActionStyleTop && self.offset.y >= self.frame.size.height) ||
             (self.style == NBPullToActionStyleBottom && -self.offset.y >= self.frame.size.height)) {
             if (_leftActionCell.alpha >= 1.0f) {

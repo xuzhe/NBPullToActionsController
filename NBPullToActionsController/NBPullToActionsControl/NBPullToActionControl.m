@@ -2,15 +2,16 @@
 //  NBPullToActionControl.m
 //  Rakunew
 //
-//  Created by zhe on 9/27/13.
-//  Copyright (c) 2013 RAKUNEW.com. All rights reserved.
+//  Created by Xu Zhe on 2013/09/04.
+//  Copyright (c) 2014 xuzhe.com. All rights reserved.
 //
 
 #import "NBPullToActionControl.h"
 #import <THObserversAndBinders/THObserversAndBinders.h>
 
-#define kHeightOfMyself             58.0f
-#define kShadowHeight               1.0f
+#define kDefaultHeightOfMyself             58.0f
+#define kDefaultMaxActionFireSpeed         500.0f
+#define kShadowHeight                      1.0f
 
 static __strong UIFont *__defaultFont = nil;
 
@@ -39,7 +40,7 @@ static __strong UIFont *__defaultFont = nil;
             _contentView.center = self.center;
             _contentView;
         })];
-
+        
         [self addSubview:({
             _arrowView = [[UIView alloc] initWithFrame:self.bounds];
             _arrowView.backgroundColor = [UIColor clearColor];
@@ -47,7 +48,7 @@ static __strong UIFont *__defaultFont = nil;
             _arrowView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
             _arrowView;
         })];
-    
+        
         [self addSubview:({
             _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
             _indicatorView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
@@ -106,9 +107,10 @@ static __strong UIFont *__defaultFont = nil;
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _height = kHeightOfMyself;
+        _height = kDefaultHeightOfMyself;
+        _maxActionFireSpeed = kDefaultMaxActionFireSpeed;
         
-        self.frame = CGRectMake(0.0f, 0.0f, [UIScreen mainScreen].bounds.size.width, kHeightOfMyself);
+        self.frame = CGRectMake(0.0f, 0.0f, [UIScreen mainScreen].bounds.size.width, _height);
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.clipsToBounds = NO;
         self.backgroundColor = [UIColor clearColor];
@@ -158,7 +160,7 @@ static __strong UIFont *__defaultFont = nil;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    
     if (_style == NBPullToActionStyleBottom && [self.superview isKindOfClass:[UIScrollView class]]) {
         [self relayoutMe:(UIScrollView *)self.superview];
     }
@@ -208,7 +210,7 @@ static __strong UIFont *__defaultFont = nil;
         if (!_isRefreshing) {
             self.alpha = _offset.y < 0.0f ? 0.0f : MIN(((_offset.y) / _height), 1.0f);
         }
-
+        
     }];
     if (_style == NBPullToActionStyleBottom) {
         _contentSizeObserver = [THObserver observerForObject:newSuperview keyPath:@"contentSize" oldAndNewBlock:^(id oldValue, id newValue) {
@@ -266,9 +268,11 @@ static __strong UIFont *__defaultFont = nil;
 }
 
 - (void)panGestureRecognized:(UIPanGestureRecognizer *)gestureRecognizer {
-    if (_isRefreshing || ![gestureRecognizer isEqual:_panGestureRecognizer]) return;
+    if (!self.enabled || _isRefreshing || ![gestureRecognizer isEqual:_panGestureRecognizer]) return;
     
-    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+    if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+        _lastSpeed = [gestureRecognizer velocityInView:self].y;
+    } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded && abs(_lastSpeed) <= self.maxActionFireSpeed) {
         if ((_style == NBPullToActionStyleTop && self.offset.y >= self.frame.size.height) ||
             (_style == NBPullToActionStyleBottom && -self.offset.y >= self.frame.size.height)) {
             [self sendActionsForControlEvents:UIControlEventValueChanged];

@@ -3,7 +3,7 @@
 //  Rakunew
 //
 //  Created by Xu Zhe on 2013/09/04.
-//  Copyright (c) 2013年 RAKUNEW.com. All rights reserved.
+//  Copyright (c) 2014 xuzhe.com. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -2,8 +2,8 @@
 //  NBPullToActionControl.h
 //  Rakunew
 //
-//  Created by zhe on 9/27/13.
-//  Copyright (c) 2013 RAKUNEW.com. All rights reserved.
+//  Created by Xu Zhe on 2013/09/04.
+//  Copyright (c) 2014 xuzhe.com. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -13,10 +13,10 @@
 
 
 /*///////////////////////////////////////////////////////
-Usage
-    NBPullToActionControl *pullToActionControl = [NBPullToActionControl alloc] init];
-    [scrollview addSubview:pullToActionControl];
-*////////////////////////////////////////////////////////
+ Usage
+ NBPullToActionControl *pullToActionControl = [NBPullToActionControl alloc] init];
+ [scrollview addSubview:pullToActionControl];
+ *////////////////////////////////////////////////////////
 
 typedef enum {
     NBPullToActionStyleTop = 0, // Top as default
@@ -42,6 +42,7 @@ typedef enum {
     UIEdgeInsets _originalEdgeInsets;
     UIPanGestureRecognizer *_panGestureRecognizer;
     CGPoint _offset;
+    CGFloat _lastSpeed;
 }
 
 // Readonly Property
@@ -51,6 +52,7 @@ typedef enum {
 // Readwrite Property
 @property (nonatomic, assign) NBPullToActionStyle style;
 @property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) CGFloat maxActionFireSpeed;
 
 // Public Methods
 - (void)beginRefreshing;
