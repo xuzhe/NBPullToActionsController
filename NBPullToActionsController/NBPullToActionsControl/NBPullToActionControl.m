@@ -191,20 +191,23 @@ static __strong UIFont *__defaultFont = nil;
     
     if (!newSuperview || ![newSuperview isKindOfClass:[UIScrollView class]]) return;
     
-    UIScrollView *scrollView = (UIScrollView *)newSuperview;
+    __weak UIScrollView *scrollView = (UIScrollView *)newSuperview;
     scrollView.alwaysBounceVertical = YES;
     [self relayoutMe:scrollView];
     
     _contentOffsetObserver = [THObserver observerForObject:newSuperview keyPath:@"contentOffset" oldAndNewBlock:^(id oldValue, id newValue) {
+        __strong UIScrollView *strongScrollView = scrollView;
+        if (!strongScrollView) return;
+        
         _offset = [newValue CGPointValue];
         if (_style == NBPullToActionStyleBottom) {  // Do not merge the two "if" here for performance reason
-            if (scrollView.contentSize.height > scrollView.bounds.size.height - scrollView.contentInset.top) {
-                _offset.y -= (scrollView.contentSize.height - scrollView.bounds.size.height);
+            if (strongScrollView.contentSize.height > strongScrollView.bounds.size.height - strongScrollView.contentInset.top) {
+                _offset.y -= (strongScrollView.contentSize.height - strongScrollView.bounds.size.height);
             } else {
-                _offset.y += scrollView.contentInset.top;
+                _offset.y += strongScrollView.contentInset.top;
             }
         } else {
-            _offset.y += scrollView.contentInset.top;
+            _offset.y += strongScrollView.contentInset.top;
             _offset.y = -_offset.y;
         }
         if (!_isRefreshing) {
@@ -214,7 +217,9 @@ static __strong UIFont *__defaultFont = nil;
     }];
     if (_style == NBPullToActionStyleBottom) {
         _contentSizeObserver = [THObserver observerForObject:newSuperview keyPath:@"contentSize" oldAndNewBlock:^(id oldValue, id newValue) {
-            [self relayoutMe:scrollView];
+            __strong UIScrollView *strongScrollView = scrollView;
+            if (!strongScrollView) return;
+            [self relayoutMe:strongScrollView];
         }];
     }
     
