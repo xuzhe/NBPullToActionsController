@@ -37,17 +37,10 @@ typedef enum {
 
 @interface NBPullToActionControl : UIControl <UIGestureRecognizerDelegate> {
     
-@protected
-    BOOL _isRefreshing;
-    UIEdgeInsets _originalEdgeInsets;
-    UIPanGestureRecognizer *_panGestureRecognizer;
-    CGPoint _offset;
-    CGFloat _lastSpeed;
 }
 
 // Readonly Property
 @property (nonatomic, readonly, assign, getter = _isRefreshing) BOOL refreshing;
-@property (nonatomic, readonly, assign) CGPoint offset;
 
 // Readwrite Property
 @property (nonatomic, assign) NBPullToActionStyle style;

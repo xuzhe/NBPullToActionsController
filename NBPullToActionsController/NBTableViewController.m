@@ -42,6 +42,11 @@ static NSString *CellIdentifier = @"Cell";
     return self;
 }
 
+- (void)dealloc {
+#warning You have to remove the NBPullToActionControl manually, since iOS have problem removing observer(not working) when scrollView being dealloced.
+    [_refreshControl removeFromSuperview];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -110,6 +115,13 @@ static NSString *CellIdentifier = @"Cell";
     cell.textLabel.text = _dataArray[indexPath.row];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NBTableViewController *tableViewController = [[NBTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:tableViewController animated:YES];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

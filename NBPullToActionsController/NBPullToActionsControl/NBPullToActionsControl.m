@@ -12,6 +12,16 @@
 #define kShadowHeight               1.0f
 #define kMidLinePadding             10.0f
 
+@interface NBPullToActionControl (ProtectedProperties)
+
+@property (nonatomic, assign) BOOL isRefreshing;
+@property (nonatomic, assign) UIEdgeInsets originalEdgeInsets;
+@property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
+@property (nonatomic, assign) CGPoint offset;
+@property (nonatomic, assign) CGFloat lastSpeed;
+
+@end
+
 @interface NBPullToActionsControl()
 
 @end
@@ -95,13 +105,13 @@
 }
 
 - (void)panGestureRecognized:(UIPanGestureRecognizer *)gestureRecognizer {
-    if (!self.enabled || _isRefreshing || ![gestureRecognizer isEqual:_panGestureRecognizer]) return;
+    if (!self.enabled || self.isRefreshing || ![gestureRecognizer isEqual:self.panGestureRecognizer]) return;
     
     if (gestureRecognizer.state == UIGestureRecognizerStatePossible || gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         _deltaOffset = 0.0f;
         _type = NBPullToActionTypeUnknown;
     } else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
-        _lastSpeed = [gestureRecognizer velocityInView:self].y;
+        self.lastSpeed = [gestureRecognizer velocityInView:self].y;
         
         CGFloat txWithOutDelta = [gestureRecognizer translationInView:_midLineView].x * 2.0f;
         CGFloat tx = txWithOutDelta - _deltaOffset;
@@ -136,7 +146,7 @@
         [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
             _midLineView.transform = CGAffineTransformMakeTranslation(tx, 0.0f);
         }];
-    } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded && abs(_lastSpeed) <= self.maxActionFireSpeed) {
+    } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded && abs(self.lastSpeed) <= self.maxActionFireSpeed) {
         if ((self.style == NBPullToActionStyleTop && self.offset.y >= self.frame.size.height) ||
             (self.style == NBPullToActionStyleBottom && -self.offset.y >= self.frame.size.height)) {
             if (_leftActionCell.alpha >= 1.0f) {

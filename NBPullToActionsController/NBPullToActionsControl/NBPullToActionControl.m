@@ -97,6 +97,16 @@ static __strong UIFont *__defaultFont = nil;
 
 @end
 
+@interface NBPullToActionControl ()
+
+@property (nonatomic, assign) BOOL isRefreshing;
+@property (nonatomic, assign) UIEdgeInsets originalEdgeInsets;
+@property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
+@property (nonatomic, assign) CGPoint offset;
+@property (nonatomic, assign) CGFloat lastSpeed;
+
+@end
+
 @implementation NBPullToActionControl {
     THObserver *_contentOffsetObserver;
     THObserver *_contentSizeObserver;
@@ -195,23 +205,27 @@ static __strong UIFont *__defaultFont = nil;
     scrollView.alwaysBounceVertical = YES;
     [self relayoutMe:scrollView];
     
+    __weak __typeof(self) weakMe = self;
     _contentOffsetObserver = [THObserver observerForObject:newSuperview keyPath:@"contentOffset" oldAndNewBlock:^(id oldValue, id newValue) {
         __strong UIScrollView *strongScrollView = scrollView;
-        if (!strongScrollView) return;
+        __strong __typeof(weakMe) strongMe = weakMe;
+        if (!strongScrollView || !strongMe) return;
         
-        _offset = [newValue CGPointValue];
-        if (_style == NBPullToActionStyleBottom) {  // Do not merge the two "if" here for performance reason
+        CGPoint offset = [newValue CGPointValue];
+        if (strongMe.style == NBPullToActionStyleBottom) {  // Do not merge the two "if" here for performance reason
             if (strongScrollView.contentSize.height > strongScrollView.bounds.size.height - strongScrollView.contentInset.top) {
-                _offset.y -= (strongScrollView.contentSize.height - strongScrollView.bounds.size.height);
+                offset.y -= (strongScrollView.contentSize.height - strongScrollView.bounds.size.height);
             } else {
-                _offset.y += strongScrollView.contentInset.top;
+                offset.y += strongScrollView.contentInset.top;
             }
         } else {
-            _offset.y += strongScrollView.contentInset.top;
-            _offset.y = -_offset.y;
+            offset.y += strongScrollView.contentInset.top;
+            offset.y = -offset.y;
         }
-        if (!_isRefreshing) {
-            self.alpha = _offset.y < 0.0f ? 0.0f : MIN(((_offset.y) / _height), 1.0f);
+        strongMe.offset = offset;
+        
+        if (!strongMe.isRefreshing) {
+            strongMe.alpha = offset.y < 0.0f ? 0.0f : MIN(((offset.y) / strongMe.height), 1.0f);
         }
         
     }];
@@ -219,7 +233,7 @@ static __strong UIFont *__defaultFont = nil;
         _contentSizeObserver = [THObserver observerForObject:newSuperview keyPath:@"contentSize" oldAndNewBlock:^(id oldValue, id newValue) {
             __strong UIScrollView *strongScrollView = scrollView;
             if (!strongScrollView) return;
-            [self relayoutMe:strongScrollView];
+            [weakMe relayoutMe:strongScrollView];
         }];
     }
     
