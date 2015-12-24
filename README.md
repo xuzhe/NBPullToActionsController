@@ -1,7 +1,7 @@
 NBPullToActionsController
 =====
 
-This control provides an easy to use UIControl to make "Pull to Refresh" and "Pull to Shuffle" possiable at the same time.
+This control provides an easy to use UIControl to make "Pull to Refresh" and "Pull to Shuffle" possiable at the same time (Up to 3 actions max).
 
 You just need to pull down and swipe to left or right to select which action you want.
 
