@@ -12,12 +12,67 @@
 #define kDefaultHeightOfMyself             58.0f
 #define kDefaultMaxActionFireSpeed         500.0f
 #define kShadowHeight                      1.0f
+#define kImageAndTitleSpacing              1.0f
 
 static __strong UIFont *__defaultFont = nil;
 
+@interface NBPullToActionCellContentView : UIView
+
+- (instancetype)initWithImage:(UIImage *)image title:(NSString *)title;
+@end
+
+@implementation NBPullToActionCellContentView {
+    UIImage *_image;
+    NSString *_title;
+
+    CGSize _titleSize;
+}
+
+- (instancetype)initWithImage:(UIImage *)image title:(NSString *)title {
+    self = [super init];
+    if (self) {
+        NSAssert(image || title, @"You should at least set a image or a title");
+        
+        self.backgroundColor = [UIColor clearColor];
+        _image = image;
+        _title = title;
+        
+        CGRect bounds = CGRectZero;
+        
+        if (image) {
+            bounds.size = image.size;
+        }
+        if (title && [title length] > 0) {
+            NSAssert(__defaultFont, @"You should always set default font first");
+            
+            _titleSize = [title sizeWithAttributes:@{NSFontAttributeName:__defaultFont}];
+            if (image) {
+                bounds.size.height += kImageAndTitleSpacing;
+            }
+            bounds.size.height += _titleSize.height;
+            bounds.size.width = MAX(bounds.size.width, _titleSize.width);
+        }
+        
+        self.frame = bounds;
+    }
+    return self;
+}
+
+- (void)drawRect:(CGRect)rect {
+    if (_image) {
+        [_image drawAtPoint:CGPointMake(floorf((rect.size.width - _image.size.width) * 0.5f), 0)];
+    }
+    if (_title && [_title length] > 0) {
+        [_title drawAtPoint:CGPointMake(floorf((rect.size.width - _titleSize.width) * 0.5f), _image ? _image.size.height + kImageAndTitleSpacing : 0.0f) withAttributes:@{NSFontAttributeName:__defaultFont}];
+    }
+}
+
+@end
+
 @implementation NBPullToActionCell {
-    UIButton *_contentView;
+    NBPullToActionCellContentView *_contentView;
     UIActivityIndicatorView *_indicatorView;
+    CGFloat _displayPercent;
 }
 
 - (instancetype)initWithImage:(UIImage *)image title:(NSString *)title {
@@ -27,15 +82,7 @@ static __strong UIFont *__defaultFont = nil;
         self.backgroundColor = [UIColor clearColor];
         
         [self addSubview:({
-            _contentView = [UIButton buttonWithType:UIButtonTypeCustom];
-            [_contentView setImage:image forState:UIControlStateNormal];
-            [_contentView setTitle:title forState:UIControlStateNormal];
-            [_contentView setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            if (__defaultFont) {
-                _contentView.titleLabel.font = __defaultFont;
-            }
-            _contentView.imageEdgeInsets = UIEdgeInsetsMake(0.0f, -10.0f, 0.0f, 0.0f);
-            [_contentView sizeToFit];
+            _contentView = [[NBPullToActionCellContentView alloc] initWithImage:image title:title];
             _contentView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
             _contentView.center = self.center;
             _contentView;
@@ -51,8 +98,8 @@ static __strong UIFont *__defaultFont = nil;
         
         [self addSubview:({
             _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-            _indicatorView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
             _indicatorView.center = self.center;
+            _indicatorView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
             _indicatorView.hidesWhenStopped = YES;
             _indicatorView.hidden = YES;
             _indicatorView;
@@ -61,11 +108,9 @@ static __strong UIFont *__defaultFont = nil;
     return self;
 }
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    
-    CGFloat alpha = frame.size.width / self.superview.frame.size.width;
-    self.alpha = MAX(MIN(alpha > 0.5f ? alpha * 1.2f : alpha * 0.6f, 1.0f), 0.0f);
+- (void)layoutSubviews {
+    _contentView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+    _indicatorView.center = _contentView.center;
 }
 
 - (void)showActivityIndicator {
@@ -84,15 +129,33 @@ static __strong UIFont *__defaultFont = nil;
     }
     if (toIdentity) {
         _arrowView.transform = CGAffineTransformMakeRotation(M_PI);
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
             _arrowView.transform = CGAffineTransformIdentity;
         }];
     } else {
         _arrowView.transform = CGAffineTransformIdentity;
-        [UIView animateWithDuration:0.2 animations:^{
+        [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
             _arrowView.transform = CGAffineTransformMakeRotation(M_PI);
         }];
     }
+}
+
+- (void)rotateArrowViewWithPercent:(CGFloat)percent {
+    // TODO: Rotate Arrow with gesture
+}
+
+- (void)displayPercent:(CGFloat)percent {
+    percent = MIN(MAX(percent, 0.0f), 1.0f);    // make sure percent between 0 ~ 1.0
+    _displayPercent = percent;
+    
+    _contentView.alpha = MAX(percent, 0.3f);
+    
+    CGFloat scale = 0.4f + 0.6f * percent;
+    _contentView.transform = CGAffineTransformMakeScale(scale, scale);
+}
+
+- (CGFloat)displayPercent {
+    return _displayPercent;
 }
 
 @end
@@ -174,6 +237,11 @@ static __strong UIFont *__defaultFont = nil;
     if (_style == NBPullToActionStyleBottom && [self.superview isKindOfClass:[UIScrollView class]]) {
         [self relayoutMe:(UIScrollView *)self.superview];
     }
+}
+
+- (void)setOffset:(CGPoint)offset {
+    _offset = offset;
+    [_actionCell displayPercent:MAX(MIN(offset.y / self.height, 1.0f), 0.0f)];
 }
 
 - (void)setStyle:(NBPullToActionStyle)style {
@@ -272,9 +340,9 @@ static __strong UIFont *__defaultFont = nil;
     if (!_isRefreshing) {
         return;
     }
-    _isRefreshing = NO;
     if (![self.superview isKindOfClass:[UIScrollView class]]) {
         [self hideActivityIndicators];
+        _isRefreshing = NO;
         return;
     }
     
@@ -283,6 +351,7 @@ static __strong UIFont *__defaultFont = nil;
     } completion:^(BOOL finished) {
         if (block) block();
         [self hideActivityIndicators];
+        _isRefreshing = NO;
     }];
 }
 

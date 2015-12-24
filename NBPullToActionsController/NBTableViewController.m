@@ -57,9 +57,13 @@ static NSString *CellIdentifier = @"Cell";
     NSString *refreshTitle = NSLocalizedString(@"Refresh", nil);
     UIImage *shuffleIcon = [UIImage imageNamed:@"shuffle"];
     NSString *shuffleTitle = NSLocalizedString(@"Shuffle", nil);
-
-    // Add the pull to action control
-    _refreshControl = [[NBPullToActionsControl alloc] initWithLeftActionImage:refreshIcon leftActionTitle:refreshTitle rightActionImage:shuffleIcon rightActionTitle:shuffleTitle];
+    UIImage *searchIcon = [UIImage imageNamed:@"search"];
+    NSString *searchTitle = NSLocalizedString(@"Search", nil);
+    
+    NSArray *images = @[shuffleIcon, refreshIcon, searchIcon];
+    NSArray *titles = @[shuffleTitle, refreshTitle, searchTitle];
+    
+    _refreshControl = [[NBPullToActionsControl alloc] initWithActionImages:images actionTitles:titles];
     [self.tableView addSubview:_refreshControl];
     
     __weak __typeof(self) weakSelf = self;
@@ -73,9 +77,11 @@ static NSString *CellIdentifier = @"Cell";
 
 - (void)handleRefresh {
     NBPullToActionType type = ((NBPullToActionsControl *)_refreshControl).type;
-    if (type == NBPullToActionTypeRight) {
+    if (type == NBPullToActionTypeLeft) {
         _dataArray = [_originalArray shuffle];
-    } else if (type == NBPullToActionTypeLeft) {
+    } else if (type == NBPullToActionTypeRight) {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Search Action", nil) message:NSLocalizedString(@"You should pop up your own search ViewController here.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+    } else if (type == NBPullToActionTypeMiddle) {
         _dataArray = _originalArray;
     } else {
         // Unknown action. You should give users a nicer notification here.

@@ -10,7 +10,8 @@
 #import "NBPullToActionControl.h"
 
 typedef enum {
-    NBPullToActionTypeUnknown = 0,
+    NBPullToActionTypeUnknown = -1,
+    NBPullToActionTypeMiddle = 0,
     NBPullToActionTypeLeft = 1,
     NBPullToActionTypeRight = 2,
 } NBPullToActionType;
@@ -19,6 +20,6 @@ typedef enum {
 @property (nonatomic, readonly) NBPullToActionType type;
 
 // Init Mehotd
-- (instancetype)initWithLeftActionImage:(UIImage *)leftActionImage leftActionTitle:(NSString *)leftActionTitle rightActionImage:(UIImage *)rightActionImage rightActionTitle:(NSString *)rightActionTitle;
+- (instancetype)initWithActionImages:(NSArray *)images actionTitles:(NSArray *)titles;
 
 @end

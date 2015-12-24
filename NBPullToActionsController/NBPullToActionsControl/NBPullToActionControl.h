@@ -26,6 +26,7 @@ typedef enum {
 @interface NBPullToActionCell : UIView
 
 @property (nonatomic, strong, readonly) UIView *arrowView;
+@property (nonatomic, assign, readonly) CGFloat displayPercent;
 
 - (instancetype)initWithImage:(UIImage *)image title:(NSString *)title;
 
@@ -33,6 +34,8 @@ typedef enum {
 - (void)showActivityIndicator;
 - (void)hideActivityIndicator;
 - (void)rotateArrowView:(BOOL)toIdentity;
+- (void)rotateArrowViewWithPercent:(CGFloat)percent;
+- (void)displayPercent:(CGFloat)percent;
 @end
 
 @interface NBPullToActionControl : UIControl <UIGestureRecognizerDelegate> {

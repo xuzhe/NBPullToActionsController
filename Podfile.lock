@@ -1,6 +1,6 @@
 PODS:
   - ALActionBlocks (1.0.3)
-  - Masonry (0.4.0)
+  - Masonry (0.6.3)
   - THObserversAndBinders (1.0.0)
 
 DEPENDENCIES:
@@ -9,8 +9,8 @@ DEPENDENCIES:
   - THObserversAndBinders
 
 SPEC CHECKSUMS:
-  ALActionBlocks: ddb7dfc87c82aff450717f9b0e8b29ee55be5b6a
-  Masonry: d673617c9cbc24aaea90fba20b10e47fd9970a39
-  THObserversAndBinders: 5f0e709e8b704a8646ffdee9beb01a8aefc1dcb2
+  ALActionBlocks: ac91b1a37b60a8004fb687ddade0600446f3d3fa
+  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
+  THObserversAndBinders: 668781c62c0060317e58c93fe22f59f77d9da8d7
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.39.0
