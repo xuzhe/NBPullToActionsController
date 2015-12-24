@@ -1,6 +1,6 @@
 //
 //  NBPullToActionsControl.m
-//  Rakunew
+//  NBPullToActionControl
 //
 //  Created by Xu Zhe on 2013/09/04.
 //  Copyright (c) 2014 xuzhe.com. All rights reserved.

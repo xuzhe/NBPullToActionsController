@@ -1,17 +1,18 @@
 NBPullToActionsController
 =====
 
-This control provides an easy to use UIControl to make "Pull to Refresh" and "Pull to Shuffle" possiable at the same time (Up to 3 actions max).
+This control provides an easy to use UIControl to make multiple "pull to refresh" actions possiable at the same time (Up to 3 actions max).
 
-You just need to pull down and swipe to left or right to select which action you want.
+Like Chrome for iOS, you just need to pull down and swipe to left or right to select which action you want.
+(Please NOTE, This project was 2 years before Chrome for iOS implementing the similar idea)
 
 ![Screenshot](https://raw.githubusercontent.com/xuzhe/NBPullToActionsController/master/Screenshot/Screenshot1.png)
 
-To Add this control, is as simple as add a view to UIScrolView. For example:
+To Add this control is as simple as add a view to UIScrolView. For example:
 ----------
 ```
     // Add the pull to action control
-    NBPullToActionsControl *refreshControl = [[NBPullToActionsControl alloc] initWithLeftActionImage:refreshIcon leftActionTitle:refreshTitle rightActionImage:shuffleIcon rightActionTitle:shuffleTitle];
+    NBPullToActionsControl *refreshControl = [[NBPullToActionsControl alloc] initWithActionImages:imageArray actionTitles:titleArray];
     [self.tableView addSubview:refreshControl];
     
     __weak __typeof(self) weakSelf = self;
@@ -24,6 +25,8 @@ To Add this control, is as simple as add a view to UIScrolView. For example:
 
 Development Environment
 =====
+Before run the DEMO project:
+
 * Install CocoaPods
 * `pod install`
 * Open Project use: `NBPullToActionsController.xcworkspace`
