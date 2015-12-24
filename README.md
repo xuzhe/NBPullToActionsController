@@ -5,7 +5,7 @@ This control provides an easy to use UIControl to make "Pull to Refresh" and "Pu
 
 You just need to pull down and swipe to left or right to select which action you want.
 
-![Screenshot](https://raw2.github.com/xuzhe/NBPullToActionsController/master/Screenshot/Screenshot1.png)
+![Screenshot](https://raw.githubusercontent.com/xuzhe/NBPullToActionsController/master/Screenshot/Screenshot1.png)
 
 To Add this control, is as simple as add a view to UIScrolView. For example:
 ----------
